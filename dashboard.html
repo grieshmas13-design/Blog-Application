@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BlogSpace | Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+
+        <div class="logo">BlogSpace</div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="dashboard.html" class="active">Dashboard</a>
+        </nav>
+
+    </header>
+
+
+    <!-- Dashboard -->
+    <main class="dashboard-container">
+
+        <div class="dashboard-header">
+
+            <div>
+                <h1>My Dashboard</h1>
+                <p>Manage your blog posts and create new stories.</p>
+            </div>
+
+            <a href="create-blog.html" class="dashboard-btn">
+                + Create Blog
+            </a>
+
+        </div>
+
+
+        <!-- Statistics -->
+        <section class="stats">
+
+            <div class="stat-card">
+                <h3 id="totalBlogs">0</h3>
+                <p>Total Blogs</p>
+            </div>
+
+            <div class="stat-card">
+                <h3 id="publishedBlogs">0</h3>
+                <p>Published</p>
+            </div>
+
+            <div class="stat-card">
+                <h3 id="draftBlogs">0</h3>
+                <p>Drafts</p>
+            </div>
+
+        </section>
+
+
+        <!-- Blog Posts -->
+        <section class="dashboard-posts">
+
+            <h2>My Blog Posts</h2>
+
+            <div id="dashboardBlogList" class="dashboard-blog-list">
+
+                <div class="empty-dashboard">
+                    <div>📝</div>
+
+                    <h3>No blog posts yet</h3>
+
+                    <p>
+                        Start sharing your ideas by creating
+                        your first blog post.
+                    </p>
+
+                    <a href="create-blog.html" class="dashboard-btn">
+                        Create Your First Blog
+                    </a>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 BlogSpace. All Rights Reserved.</p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
