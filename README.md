@@ -1,85 +1,153 @@
-# 📝 CodoMax Blog Application
-
-A responsive Blog Application developed as part of the **CodoMax Frontend Development Internship – Module 1, Task 2**.
+# Blog Application – Database Integration
 
 ## 📌 Project Overview
 
-BlogSpace is a beginner-friendly responsive blog application interface where users can register, log in, create blog posts, and manage their posts through a dashboard.
+This is a full-stack Blog Application developed as part of **Module 3 – Database Integration**.
 
-The project demonstrates the fundamentals of **HTML, CSS, and JavaScript** along with browser `localStorage` for basic data persistence.
+The application allows users to register and log in securely, create blog posts, view all available blogs, and open individual blog posts.
 
-## ✨ Features
+## 🚀 Technologies Used
 
-* 🏠 Responsive Home Page
-* 🔐 User Registration
-* 🔑 User Login
-* 📝 Create Blog Posts
-* 📊 Dashboard for managing blogs
-* 📌 Published and Draft blog status
-* 💾 LocalStorage-based data storage
-* 📱 Responsive design for different screen sizes
-* 🎨 Clean and modern user interface
-
-## 📄 Pages
-
-1. **Home** – Displays the latest blog posts
-2. **Login** – Allows registered users to log in
-3. **Register** – Allows new users to create an account
-4. **Dashboard** – Displays blog statistics and created posts
-5. **Create Blog** – Allows users to create and publish or save blog posts as drafts
-
-## 🛠️ Technologies Used
+### Frontend
 
 * HTML5
 * CSS3
 * JavaScript
-* Browser LocalStorage
 
-## 📁 Project Structure
+### Backend
+
+* Node.js
+* Express.js
+
+### Database
+
+* MongoDB
+* Mongoose
+
+### Security
+
+* bcrypt password hashing
+* Environment variables for database credentials
+
+## ✨ Features
+
+* User registration
+* Secure password hashing
+* User login authentication
+* Create and store blog posts
+* Retrieve all blogs from MongoDB
+* Display blogs on the dashboard
+* View individual blog details
+* Blog categories and status
+* MongoDB database integration
+* REST API integration between frontend and backend
+
+## 📂 Project Structure
 
 ```text
-CodoMax-Blog-Application/
+Blog-Application/
 │
 ├── index.html
 ├── login.html
 ├── register.html
 ├── dashboard.html
 ├── create-blog.html
-├── style.css
+├── blog-details.html
 ├── script.js
-└── README.md
+├── style.css
+│
+├── server.js
+├── package.json
+├── package-lock.json
+├── README.md
+└── .gitignore
 ```
 
-## 🚀 How to Run
+## 🔗 API Endpoints
 
-1. Download or clone this repository.
-2. Open the project folder in VS Code.
-3. Open `index.html` in a web browser.
-4. Navigate through the Home, Login, Register, Dashboard, and Create Blog pages.
+### User Registration
 
-## 💡 Learning Outcomes
+```text
+POST /api/register
+```
 
-Through this project, I practiced:
+### User Login
 
-* Creating structured web pages using HTML
-* Designing responsive layouts using CSS
-* Adding interactivity using JavaScript
-* Handling forms and user input
-* Using LocalStorage for browser-based data storage
-* Creating a multi-page frontend application
-* Managing and publishing a project using GitHub
+```text
+POST /api/login
+```
 
-## 🎯 Internship Task
+### Create Blog
 
-**Program:** CodoMax Internship
-**Module:** Module 1
-**Task:** Task 2 – Frontend Development
-**Project:** Responsive Blog Application
+```text
+POST /api/blogs
+```
 
-## 👩‍💻 Developed By
+### Get All Blogs
 
-**Grieshma**
+```text
+GET /api/blogs
+```
 
-## 📌 Note
+### Get Individual Blog
 
-This project is created for educational and internship purposes. The application uses browser LocalStorage for demonstration and is not intended as a production authentication system.
+```text
+GET /api/blogs/:id
+```
+
+## 🔐 Security
+
+User passwords are hashed using **bcrypt** before being stored in MongoDB.
+
+The MongoDB connection string is stored in an `.env` file and is excluded from GitHub using `.gitignore`.
+
+```text
+.env
+node_modules/
+```
+
+## ▶️ How to Run
+
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Configure environment variables
+
+Create a `.env` file:
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+PORT=3000
+```
+
+### 3. Start the server
+
+```bash
+node server.js
+```
+
+The backend will run at:
+
+```text
+http://localhost:3000
+```
+
+## 🎯 Module 3 Deliverables
+
+* ✅ MongoDB Integration
+* ✅ Secure User Authentication
+* ✅ Blog Data Storage
+* ✅ Retrieve All Blogs
+* ✅ Individual Blog Details
+* ✅ GitHub Repository
+
+## 🔗 GitHub Repository
+
+https://github.com/grieshmas13-design/Blog-Application
+
+## 👩‍💻 Project
+
+Developed as part of an internship project to practice full-stack web development and database integration.
