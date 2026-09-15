@@ -753,4 +753,39 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+/* ================================
+   BLOG SEARCH & CATEGORY FILTER
+================================ */
+
+.blog-filters {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0 25px;
+    flex-wrap: wrap;
+}
+
+.blog-filters input,
+.blog-filters select {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+.blog-filters input {
+    flex: 1;
+    min-width: 220px;
+}
+
+.blog-filters select {
+    min-width: 180px;
+    background: white;
+    cursor: pointer;
+}
+
+.blog-filters input:focus,
+.blog-filters select:focus {
+    border-color: #777;
+}
 
