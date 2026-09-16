@@ -1,27 +1,38 @@
-@'
-# Blog Application – CRUD Operations
+# CodoMax Blog Application
 
-## 📌 Project Overview
+A full-stack Blog Application developed as part of my CodoMax Internship.
 
-This is a full-stack Blog Application developed as part of **Module 4 – CRUD Operations**.
+## 🚀 Project Overview
 
-The application allows users to register and log in securely, create blog posts, view blogs, search blogs, filter blogs by category, update existing blogs, delete blogs, and view individual blog details.
+This project is a full-stack blogging platform that allows users to register, log in securely, create and manage their own blog posts, and browse published blogs.
 
-## 🚀 Features
+The application uses a Node.js and Express.js backend, MongoDB database, JWT authentication, and a responsive HTML/CSS/JavaScript frontend.
 
-- User Registration
-- User Login
-- Create Blog Posts
-- View All Blog Posts
-- View Individual Blog Details
-- Update/Edit Blog Posts
-- Delete Blog Posts
-- Search Blogs
-- Filter Blogs by Category
-- Combined Search and Category Filtering
-- MongoDB Database Integration
-- Password Hashing using bcrypt
-- REST API using Express.js
+## ✨ Features
+
+### Authentication
+- User registration
+- Secure password hashing using bcrypt
+- User login
+- JWT-based authentication
+- Protected dashboard
+- User profile
+- Logout functionality
+
+### Blog Management
+- Create blog posts
+- Edit blog posts
+- Delete blog posts
+- Publish blogs
+- Save blogs as drafts
+- View published blogs
+- View individual blog details
+- Users can manage only their own blogs
+
+### Search & Filtering
+- Search blogs by title, content, or author
+- Filter blogs by category
+- Combine search and category filtering
 
 ## 🛠️ Technologies Used
 
@@ -33,53 +44,36 @@ The application allows users to register and log in securely, create blog posts,
 ### Backend
 - Node.js
 - Express.js
-- Mongoose
+- REST API
 
 ### Database
 - MongoDB
+- Mongoose
 
-### Tools
-- Visual Studio Code
-- Git
-- GitHub
+### Authentication & Security
+- JWT (JSON Web Token)
+- bcrypt
+- dotenv
 
-## 🔗 CRUD API Endpoints
-
-| Method | Endpoint | Description |
-|---|---|---|
-| POST | `/api/blogs` | Create a new blog |
-| GET | `/api/blogs` | Retrieve all blogs |
-| GET | `/api/blogs/:id` | Retrieve a single blog |
-| PUT | `/api/blogs/:id` | Update an existing blog |
-| DELETE | `/api/blogs/:id` | Delete a blog |
-
-## 🔎 Search and Category Filter
-
-The dashboard provides users with:
-
-- Search by blog title
-- Search by blog content
-- Search by author
-- Filter by blog category
-- Combine search and category filters
-
-## 📂 Project Structure
+## 📁 Project Structure
 
 ```text
 Blog-Application/
-├── index.html
-├── login.html
-├── register.html
-├── dashboard.html
-├── create-blog.html
-├── blog-details.html
-├── style.css
-├── script.js
-├── server.js
+│
 ├── models/
 │   ├── Blog.js
 │   └── User.js
+│
+├── blog-details.html
+├── create-blog.html
+├── dashboard.html
+├── index.html
+├── login.html
+├── register.html
+├── script.js
+├── style.css
+├── server.js
 ├── package.json
 ├── package-lock.json
-├── .gitignore
-└── README.md
+├── README.md
+└── .gitignore
