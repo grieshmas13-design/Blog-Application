@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,14 +30,44 @@
     <!-- Dashboard -->
     <main class="dashboard-container">
 
+        <!-- User Profile -->
+        <section class="profile-panel">
+
+            <div>
+                <h2>Welcome, <span id="profileName">User</span> 👋</h2>
+
+                <p>
+                    Email:
+                    <span id="profileEmail">Loading...</span>
+                </p>
+            </div>
+
+            <button
+                type="button"
+                class="dashboard-btn"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </section>
+
+
+        <!-- Dashboard Header -->
         <div class="dashboard-header">
 
             <div>
                 <h1>My Dashboard</h1>
-                <p>Manage your blog posts and create new stories.</p>
+
+                <p>
+                    Manage your blog posts and create new stories.
+                </p>
             </div>
 
-            <a href="create-blog.html" class="dashboard-btn">
+            <a
+                href="create-blog.html"
+                class="dashboard-btn"
+            >
                 + Create Blog
             </a>
 
@@ -47,18 +78,35 @@
         <section class="stats">
 
             <div class="stat-card">
+
                 <h3 id="totalBlogs">0</h3>
-                <p>Total Blogs</p>
+
+                <p>
+                    Total Blogs
+                </p>
+
             </div>
 
+
             <div class="stat-card">
+
                 <h3 id="publishedBlogs">0</h3>
-                <p>Published</p>
+
+                <p>
+                    Published
+                </p>
+
             </div>
 
+
             <div class="stat-card">
+
                 <h3 id="draftBlogs">0</h3>
-                <p>Drafts</p>
+
+                <p>
+                    Drafts
+                </p>
+
             </div>
 
         </section>
@@ -67,64 +115,78 @@
         <!-- Blog Posts -->
         <section class="dashboard-posts">
 
-            <h2>My Blog Posts</h2>
-            <section class="dashboard-posts">
+            <h2>
+                My Blog Posts
+            </h2>
 
-    <h2>My Blog Posts</h2>
 
-    <!-- Search and Category Filter -->
-    <div class="blog-filters">
+            <!-- Search and Category Filter -->
+            <div class="blog-filters">
 
-        <input
-            type="text"
-            id="searchBlogs"
-            placeholder="🔍 Search blogs..."
-        >
+                <input
+                    type="text"
+                    id="searchBlogs"
+                    placeholder="🔍 Search blogs..."
+                >
 
-        <select id="categoryFilter">
 
-            <option value="all">
-                All Categories
-            </option>
+                <select id="categoryFilter">
 
-            <option value="Technology">
-                Technology
-            </option>
+                    <option value="all">
+                        All Categories
+                    </option>
 
-            <option value="Education">
-                Education
-            </option>
+                    <option value="Technology">
+                        Technology
+                    </option>
 
-            <option value="Travel">
-                Travel
-            </option>
+                    <option value="Education">
+                        Education
+                    </option>
 
-            <option value="Lifestyle">
-                Lifestyle
-            </option>
+                    <option value="Travel">
+                        Travel
+                    </option>
 
-            <option value="Other">
-                Other
-            </option>
+                    <option value="Lifestyle">
+                        Lifestyle
+                    </option>
 
-        </select>
+                    <option value="Other">
+                        Other
+                    </option>
 
-    </div>
-            <div id="dashboardBlogList" class="dashboard-blog-list">
+                </select>
+
+            </div>
+
+
+            <!-- User's Blog List -->
+            <div
+                id="dashboardBlogList"
+                class="dashboard-blog-list"
+            >
 
                 <div class="empty-dashboard">
+
                     <div>📝</div>
 
-                    <h3>No blog posts yet</h3>
+                    <h3>
+                        No blog posts yet
+                    </h3>
 
                     <p>
                         Start sharing your ideas by creating
                         your first blog post.
                     </p>
 
-                    <a href="create-blog.html" class="dashboard-btn">
+                    <a
+                        href="create-blog.html"
+                        class="dashboard-btn"
+                    >
                         Create Your First Blog
                     </a>
+
                 </div>
 
             </div>
@@ -136,11 +198,16 @@
 
     <!-- Footer -->
     <footer>
-        <p>© 2026 BlogSpace. All Rights Reserved.</p>
+
+        <p>
+            © 2026 BlogSpace. All Rights Reserved.
+        </p>
+
     </footer>
 
 
     <script src="script.js"></script>
 
 </body>
+
 </html>
