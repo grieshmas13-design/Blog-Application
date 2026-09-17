@@ -1,38 +1,31 @@
 # CodoMax Blog Application
 
-A full-stack Blog Application developed as part of my CodoMax Internship.
+A full-stack Blog Application developed as part of the CodoMax Internship. The application allows users to register, log in, create blog posts, view blogs, edit their own posts, delete posts, and manage their blogs through a dashboard.
 
-## 🚀 Project Overview
+## 🌐 Live Application
 
-This project is a full-stack blogging platform that allows users to register, log in securely, create and manage their own blog posts, and browse published blogs.
+**Frontend:**  
+https://grieshmas13-design.github.io/Blog-Application/
 
-The application uses a Node.js and Express.js backend, MongoDB database, JWT authentication, and a responsive HTML/CSS/JavaScript frontend.
+**Backend API:**  
+https://codomax-blog-application-t2.onrender.com/
 
-## ✨ Features
+## 📌 Features
 
-### Authentication
-- User registration
-- Secure password hashing using bcrypt
-- User login
-- JWT-based authentication
-- Protected dashboard
-- User profile
-- Logout functionality
-
-### Blog Management
-- Create blog posts
-- Edit blog posts
-- Delete blog posts
-- Publish blogs
-- Save blogs as drafts
-- View published blogs
-- View individual blog details
-- Users can manage only their own blogs
-
-### Search & Filtering
-- Search blogs by title, content, or author
-- Filter blogs by category
-- Combine search and category filtering
+- User Registration
+- User Login
+- Create Blog Posts
+- View Published Blogs
+- View Individual Blog Details
+- Edit Blog Posts
+- Delete Blog Posts
+- Dashboard for Managing Blogs
+- Published and Draft Statistics
+- Search Blogs
+- Filter Blogs by Category
+- Responsive User Interface
+- MongoDB Database Integration
+- REST API using Node.js and Express.js
 
 ## 🛠️ Technologies Used
 
@@ -44,36 +37,28 @@ The application uses a Node.js and Express.js backend, MongoDB database, JWT aut
 ### Backend
 - Node.js
 - Express.js
+- Mongoose
 - REST API
 
 ### Database
-- MongoDB
-- Mongoose
+- MongoDB Atlas
 
-### Authentication & Security
-- JWT (JSON Web Token)
-- bcrypt
-- dotenv
+### Deployment
+- GitHub Pages – Frontend
+- Render – Backend
+- MongoDB Atlas – Database
 
-## 📁 Project Structure
+## 📂 Project Structure
 
 ```text
 Blog-Application/
 │
-├── models/
-│   ├── Blog.js
-│   └── User.js
-│
-├── blog-details.html
-├── create-blog.html
-├── dashboard.html
 ├── index.html
 ├── login.html
 ├── register.html
+├── dashboard.html
+├── create-blog.html
 ├── script.js
 ├── style.css
-├── server.js
 ├── package.json
-├── package-lock.json
-├── README.md
-└── .gitignore
+└── README.md
