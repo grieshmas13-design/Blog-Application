@@ -3,7 +3,7 @@
 // MODULE 5 - AUTHENTICATION & DASHBOARD
 // ================================
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = "https://codomax-blog-application-t2.onrender.com/api";
 
 
 // ================================
@@ -18,6 +18,7 @@ function getToken() {
 
 // Get logged-in user
 function getLoggedInUser() {
+
     const user = localStorage.getItem("user");
 
     if (!user) {
@@ -157,7 +158,6 @@ if (registerForm) {
                     await fetch(
                         `${API_URL}/register`,
                         {
-
                             method: "POST",
 
                             headers: {
@@ -259,7 +259,6 @@ if (loginForm) {
                     await fetch(
                         `${API_URL}/login`,
                         {
-
                             method: "POST",
 
                             headers: {
@@ -308,7 +307,7 @@ if (loginForm) {
                 );
 
 
-                // Keep existing login flag
+                // Keep login flag
                 localStorage.setItem(
                     "loggedIn",
                     "true"
@@ -351,6 +350,7 @@ async function loadProfile() {
     const profileName =
         document.getElementById("profileName");
 
+
     const profileEmail =
         document.getElementById("profileEmail");
 
@@ -361,7 +361,6 @@ async function loadProfile() {
 
 
     if (!isLoggedIn()) {
-
         return;
     }
 
@@ -423,7 +422,7 @@ async function loadProfile() {
         }
 
 
-        // Update localStorage with latest user data
+        // Update localStorage
         localStorage.setItem(
             "user",
             JSON.stringify({
@@ -481,6 +480,7 @@ if (blogForm) {
             }
 
 
+            // Get blog title
             const title =
                 document
                     .getElementById("blogTitle")
@@ -488,12 +488,15 @@ if (blogForm) {
                     .trim();
 
 
+            // Get category
             const category =
                 document
                     .getElementById("blogCategory")
-                    .value;
+                    .value
+                    .trim();
 
 
+            // Get content
             const content =
                 document
                     .getElementById("blogContent")
@@ -501,25 +504,116 @@ if (blogForm) {
                     .trim();
 
 
+            // Get author
+            const authorInput =
+                document.getElementById("blogAuthor");
+
+
+            let author = "";
+
+
+            // First try author input
+            if (authorInput) {
+
+                author =
+                    authorInput.value
+                        .trim();
+
+            }
+
+
+            // If empty, use logged-in user's name
+            if (!author) {
+
+                const loggedInUser =
+                    getLoggedInUser();
+
+
+                if (
+                    loggedInUser &&
+                    loggedInUser.name
+                ) {
+
+                    author =
+                        loggedInUser.name
+                            .trim();
+
+
+                    if (authorInput) {
+
+                        authorInput.value =
+                            author;
+
+                    }
+
+                }
+
+            }
+
+
+            // Get status
             const status =
                 document
                     .getElementById("blogStatus")
-                    .value;
+                    .value
+                    .trim();
 
 
-            if (
-                !title ||
-                !category ||
-                !content
-            ) {
+            // ================================
+            // VALIDATION
+            // ================================
 
-                alert(
-                    "Please fill in all required fields."
-                );
+            if (!title) {
+
+                alert("Please enter a blog title.");
+
+                document
+                    .getElementById("blogTitle")
+                    .focus();
 
                 return;
             }
 
+
+            if (!category) {
+
+                alert("Please select a category.");
+
+                document
+                    .getElementById("blogCategory")
+                    .focus();
+
+                return;
+            }
+
+
+            if (!content) {
+
+                alert("Please enter blog content.");
+
+                document
+                    .getElementById("blogContent")
+                    .focus();
+
+                return;
+            }
+
+
+            if (!author) {
+
+                alert("Please enter the Author Name.");
+
+                if (authorInput) {
+                    authorInput.focus();
+                }
+
+                return;
+            }
+
+
+            // ================================
+            // SEND BLOG TO BACKEND
+            // ================================
 
             try {
 
@@ -535,13 +629,20 @@ if (blogForm) {
 
                             body: JSON.stringify({
 
-                                title: title,
+                                title:
+                                    title,
 
-                                category: category,
+                                category:
+                                    category,
 
-                                content: content,
+                                content:
+                                    content,
 
-                                status: status
+                                author:
+                                    author,
+
+                                status:
+                                    status
 
                             })
 
@@ -927,7 +1028,10 @@ async function loadDashboard() {
     }
 
 
-    // Protect dashboard
+    // ================================
+    // CHECK LOGIN
+    // ================================
+
     if (!isLoggedIn()) {
 
         alert(
@@ -941,19 +1045,52 @@ async function loadDashboard() {
     }
 
 
+    // ================================
+    // GET LOGGED-IN USER
+    // ================================
+
+    const user =
+        getLoggedInUser();
+
+
+    if (!user || !user.name) {
+
+        console.error(
+            "Logged-in user information not found."
+        );
+
+
+        dashboardList.innerHTML = `
+
+            <div class="empty-dashboard">
+
+                <div>⚠️</div>
+
+                <h3>User information not found</h3>
+
+                <p>
+                    Please login again.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
     try {
 
-        // Fetch only logged-in user's blogs
+        // ================================
+        // GET ALL BLOGS
+        // ================================
+
         const response =
             await fetch(
-                `${API_URL}/my-blogs`,
+                `${API_URL}/blogs`,
                 {
-
-                    method: "GET",
-
-                    headers:
-                        authHeaders()
-
+                    method: "GET"
                 }
             );
 
@@ -962,37 +1099,76 @@ async function loadDashboard() {
             await response.json();
 
 
-        // Invalid or expired token
-        if (
-            response.status === 401 ||
-            response.status === 403
-        ) {
-
-            alert(
-                "Your session has expired. Please login again."
-            );
-
-            logout();
-
-            return;
-        }
-
-
         if (!response.ok) {
 
             throw new Error(
                 data.message ||
-                "Failed to fetch your blogs"
+                "Failed to fetch blogs"
             );
 
         }
 
 
-        allBlogs =
+        // ================================
+        // GET BLOGS FROM DATABASE
+        // ================================
+
+        const blogs =
             data.blogs || [];
 
 
+        // ================================
+        // SHOW ONLY LOGGED-IN USER BLOGS
+        // ================================
+
+        allBlogs =
+            blogs.filter(
+                function (blog) {
+
+                    return (
+
+                        String(
+                            blog.author || ""
+                        )
+                            .trim()
+                            .toLowerCase()
+
+                        ===
+
+                        String(
+                            user.name || ""
+                        )
+                            .trim()
+                            .toLowerCase()
+
+                    );
+
+                }
+            );
+
+
+        console.log(
+            "Logged-in user:",
+            user.name
+        );
+
+
+        console.log(
+            "User blogs:",
+            allBlogs
+        );
+
+
+        // ================================
+        // UPDATE STATISTICS
+        // ================================
+
         updateStatistics();
+
+
+        // ================================
+        // DISPLAY BLOGS
+        // ================================
 
         displayBlogs();
 
@@ -1101,44 +1277,47 @@ function displayBlogs() {
 
     // Apply search and category filter
     const filteredBlogs =
-        allBlogs.filter(function (blog) {
+        allBlogs.filter(
+            function (blog) {
 
-            const title =
-                (blog.title || "")
-                    .toLowerCase();
-
-
-            const content =
-                (blog.content || "")
-                    .toLowerCase();
+                const title =
+                    (blog.title || "")
+                        .toLowerCase();
 
 
-            const author =
-                (blog.author || "")
-                    .toLowerCase();
+                const content =
+                    (blog.content || "")
+                        .toLowerCase();
 
 
-            const category =
-                blog.category || "Other";
+                const author =
+                    (blog.author || "")
+                        .toLowerCase();
 
 
-            const matchesSearch =
-                title.includes(searchText) ||
-                content.includes(searchText) ||
-                author.includes(searchText);
+                const category =
+                    blog.category ||
+                    "Other";
 
 
-            const matchesCategory =
-                selectedCategory === "all" ||
-                category === selectedCategory;
+                const matchesSearch =
+                    title.includes(searchText) ||
+                    content.includes(searchText) ||
+                    author.includes(searchText);
 
 
-            return (
-                matchesSearch &&
-                matchesCategory
-            );
+                const matchesCategory =
+                    selectedCategory === "all" ||
+                    category === selectedCategory;
 
-        });
+
+                return (
+                    matchesSearch &&
+                    matchesCategory
+                );
+
+            }
+        );
 
 
     // No matching blogs
@@ -1148,13 +1327,20 @@ function displayBlogs() {
 
             <div class="empty-dashboard">
 
-                <div>🔍</div>
+                <div>📝</div>
 
                 <h3>No blogs found</h3>
 
                 <p>
-                    Try a different search or category.
+                    Start sharing your ideas by creating your first blog post.
                 </p>
+
+                <a
+                    href="create-blog.html"
+                    class="dashboard-btn"
+                >
+                    + Create Blog
+                </a>
 
             </div>
 
@@ -1200,13 +1386,16 @@ function displayBlogs() {
                     ${blog.category || "Other"}
                 </span>
 
+
                 <h3>
                     ${blog.title}
                 </h3>
 
+
                 <p>
                     ${blog.content}
                 </p>
+
 
                 <div class="blog-meta">
 
@@ -1214,19 +1403,24 @@ function displayBlogs() {
                         By ${blog.author}
                     </span>
 
+
                     <span>
                         ${date}
                     </span>
 
                 </div>
 
+
                 <br>
+
 
                 <span class="status ${statusClass}">
                     ${blog.status || "Published"}
                 </span>
 
+
                 <br><br>
+
 
                 <button
                     class="edit-blog-btn"
@@ -1234,6 +1428,7 @@ function displayBlogs() {
                 >
                     ✏️ Edit
                 </button>
+
 
                 <button
                     class="delete-blog-btn"
@@ -1258,7 +1453,9 @@ function displayBlogs() {
 
                     event.stopPropagation();
 
-                    editBlog(blog._id);
+                    editBlog(
+                        blog._id
+                    );
 
                 }
             );
@@ -1277,7 +1474,9 @@ function displayBlogs() {
 
                     event.stopPropagation();
 
-                    deleteBlog(blog._id);
+                    deleteBlog(
+                        blog._id
+                    );
 
                 }
             );
@@ -1450,25 +1649,30 @@ async function loadHomeBlogs() {
                         📝
                     </div>
 
+
                     <div class="blog-content">
 
                         <span class="category">
                             ${blog.category || "Other"}
                         </span>
 
+
                         <h3>
                             ${blog.title}
                         </h3>
 
+
                         <p>
                             ${blog.content}
                         </p>
+
 
                         <div class="blog-info">
 
                             <span>
                                 By ${blog.author}
                             </span>
+
 
                             <span>
                                 ${date}
@@ -1601,13 +1805,16 @@ async function loadBlogDetails() {
                         ${blog.category || "Other"}
                     </span>
 
+
                     <h1>
                         ${blog.title}
                     </h1>
 
+
                     <p>
                         ${blog.content}
                     </p>
+
 
                     <div class="blog-info">
 
@@ -1615,19 +1822,24 @@ async function loadBlogDetails() {
                             By ${blog.author}
                         </span>
 
+
                         <span>
                             ${date}
                         </span>
 
                     </div>
 
+
                     <br>
+
 
                     <span class="status">
                         ${blog.status || "Published"}
                     </span>
 
+
                     <br><br>
+
 
                     <a href="index.html">
                         ← Back to Home
@@ -1672,14 +1884,18 @@ async function loadBlogDetails() {
 // Protect dashboard
 protectDashboard();
 
+
 // Load dashboard
 loadDashboard();
+
 
 // Load profile
 loadProfile();
 
+
 // Load home blogs
 loadHomeBlogs();
+
 
 // Load individual blog
 loadBlogDetails();

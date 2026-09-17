@@ -11,10 +11,15 @@
 
 <body>
 
-    <!-- Navigation -->
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
     <header class="navbar">
 
-        <div class="logo">BlogSpace</div>
+        <div class="logo">
+            BlogSpace
+        </div>
 
         <nav>
             <a href="index.html">Home</a>
@@ -26,7 +31,10 @@
     </header>
 
 
-    <!-- Create Blog -->
+    <!-- =========================
+         CREATE BLOG
+    ========================== -->
+
     <main class="form-page">
 
         <div class="form-card blog-form-card">
@@ -40,6 +48,8 @@
 
             <form id="blogForm">
 
+                <!-- BLOG TITLE -->
+
                 <label for="blogTitle">
                     Blog Title
                 </label>
@@ -47,16 +57,23 @@
                 <input
                     type="text"
                     id="blogTitle"
+                    name="title"
                     placeholder="Enter your blog title"
                     required
                 >
 
 
+                <!-- CATEGORY -->
+
                 <label for="blogCategory">
                     Category
                 </label>
 
-                <select id="blogCategory" required>
+                <select
+                    id="blogCategory"
+                    name="category"
+                    required
+                >
 
                     <option value="">
                         Select a category
@@ -85,6 +102,8 @@
                 </select>
 
 
+                <!-- AUTHOR -->
+
                 <label for="blogAuthor">
                     Author Name
                 </label>
@@ -92,10 +111,14 @@
                 <input
                     type="text"
                     id="blogAuthor"
+                    name="author"
                     placeholder="Enter your name"
+                    autocomplete="name"
                     required
                 >
 
+
+                <!-- BLOG CONTENT -->
 
                 <label for="blogContent">
                     Blog Content
@@ -103,17 +126,24 @@
 
                 <textarea
                     id="blogContent"
+                    name="content"
                     rows="8"
                     placeholder="Write your blog content here..."
                     required
                 ></textarea>
 
 
+                <!-- STATUS -->
+
                 <label for="blogStatus">
                     Status
                 </label>
 
-                <select id="blogStatus">
+                <select
+                    id="blogStatus"
+                    name="status"
+                    required
+                >
 
                     <option value="Published">
                         Published
@@ -126,6 +156,8 @@
                 </select>
 
 
+                <!-- SUBMIT BUTTON -->
+
                 <button
                     type="submit"
                     class="form-btn"
@@ -136,10 +168,14 @@
             </form>
 
 
+            <!-- BACK LINK -->
+
             <p class="form-bottom">
+
                 <a href="dashboard.html">
                     ← Back to Dashboard
                 </a>
+
             </p>
 
         </div>
@@ -147,11 +183,20 @@
     </main>
 
 
-    <!-- Footer -->
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
     <footer>
-        <p>© 2026 BlogSpace. All Rights Reserved.</p>
+
+        <p>
+            © 2026 BlogSpace. All Rights Reserved.
+        </p>
+
     </footer>
 
+
+    <!-- JAVASCRIPT -->
 
     <script src="script.js"></script>
 
